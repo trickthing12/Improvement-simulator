@@ -18,14 +18,11 @@
         .timing-input { background: #fffbe6; border-color: #ffe58f; grid-column: 1 / -1; }
         .prop-box { grid-column: 1 / -1; background: #eef9f1; padding: 10px; border-radius: 8px; margin-top: 5px; border: 1px solid #c3e6cb; }
         .chart-container { background: white; padding: 15px; border-radius: 12px; height: 350px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        
         .comparison-panel { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
         .comp-card { padding: 10px; border-radius: 8px; background: #f9f9f9; border: 1px solid #eee; }
-        .comp-title { font-size: 0.85rem; color: #555; font-weight: bold; margin-bottom: 5px; }
         .comp-value { font-size: 1.8rem; font-weight: 800; }
         .up { color: var(--dn-color); }
         .down { color: var(--blue); }
-
         .logs-panel { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
         .log-box { background: #222; color: #0f0; padding: 10px; border-radius: 8px; height: 200px; overflow-y: auto; font-family: monospace; font-size: 0.75rem; white-space: pre-wrap; }
         button { width: 100%; padding: 15px; background: #4a90e2; color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 1.1rem; font-weight: bold; }
@@ -42,11 +39,10 @@
             <div class="input-grid">
                 <div class="input-group"><label>공격력</label><input type="number" id="lk_orig_atk" value="5000"></div>
                 <div class="input-group"><label>치확/치피(%)</label><div style="display:flex;"><input type="number" id="lk_orig_crit" value="30" style="width:50%"><input type="number" id="lk_orig_cd" value="50" style="width:50%"></div></div>
-                <div class="input-group"><label>저학년 계수(%)</label><input type="number" id="lk_orig_low_c" value="0"></div>
                 <div class="input-group"><label>고학년 계수(%)</label><input type="number" id="lk_orig_high_c" value="650"></div>
                 <div class="input-group"><label>어사이드</label><select id="lk_orig_aside"><option value="0">0</option><option value="1">a1</option><option value="2" selected>a2</option><option value="3">a3</option></select></div>
-                <div class="input-group timing-input"><label>저학년 타이밍 (초)</label><input type="text" id="lk_orig_low_t" value="10, 30"></div>
-                <div class="input-group timing-input"><label>고학년 타이밍 (초)</label><input type="text" id="lk_orig_high_t" value="30"></div>
+                <div class="input-group timing-input"><label>저학년 타이밍 (초)</label><input type="text" id="lk_orig_low_t" value="20, 40"></div>
+                <div class="input-group timing-input"><label>고학년 타이밍 (초)</label><input type="text" id="lk_orig_high_t" value="30, 32"></div>
             </div>
         </div>
 
@@ -55,12 +51,11 @@
             <div class="input-grid">
                 <div class="input-group"><label>공격력</label><input type="number" id="lk_prop_atk" value="5000"></div>
                 <div class="input-group"><label>치확/치피(%)</label><div style="display:flex;"><input type="number" id="lk_prop_crit" value="30" style="width:50%"><input type="number" id="lk_prop_cd" value="50" style="width:50%"></div></div>
-                <div class="input-group"><label>저학년 계수(%)</label><input type="number" id="lk_prop_low_c" value="0"></div>
                 <div class="input-group"><label>고학년 계수(%)</label><input type="number" id="lk_prop_high_c" value="650"></div>
                 <div class="input-group"><label>어사이드</label><select id="lk_prop_aside"><option value="0">0</option><option value="1">a1</option><option value="2" selected>a2</option><option value="3">a3</option></select></div>
                 <div class="prop-box"><label>✨ 개선 수치: 평타증폭/공증(%)</label><div style="display:flex;gap:5px;"><input type="number" id="p_norm" value="50" style="width:50%"><input type="number" id="p_atk" value="20" style="width:50%"></div></div>
-                <div class="input-group timing-input"><label>저학년 타이밍 (초)</label><input type="text" id="lk_prop_low_t" value="10, 30"></div>
-                <div class="input-group timing-input"><label>고학년 타이밍 (초)</label><input type="text" id="lk_prop_high_t" value="30"></div>
+                <div class="input-group timing-input"><label>저학년 타이밍 (초)</label><input type="text" id="lk_prop_low_t" value="20, 40"></div>
+                <div class="input-group timing-input"><label>고학년 타이밍 (초)</label><input type="text" id="lk_prop_high_t" value="30, 32"></div>
             </div>
         </div>
 
@@ -72,31 +67,31 @@
                 <div class="input-group"><label>저학년 계수(%)</label><input type="number" id="dn_low_c" value="780"></div>
                 <div class="input-group"><label>고학년 계수(%)</label><input type="number" id="dn_high_c" value="2350"></div>
                 <div class="input-group"><label>어사이드</label><select id="dn_aside"><option value="0">0</option><option value="1">a1</option><option value="2" selected>a2</option><option value="3">a3</option></select></div>
-                <div class="input-group timing-input" style="margin-top:40px;"><label>저학년 타이밍 (초)</label><input type="text" id="dn_low_t" value="10, 30"></div>
-                <div class="input-group timing-input"><label>고학년 타이밍 (초)</label><input type="text" id="dn_high_t" value="30"></div>
+                <div class="input-group timing-input" style="margin-top:40px;"><label>저학년 타이밍 (초)</label><input type="text" id="dn_low_t" value="20, 40"></div>
+                <div class="input-group timing-input"><label>고학년 타이밍 (초)</label><input type="text" id="dn_high_t" value="30, 70"></div>
             </div>
         </div>
     </div>
 
-    <button onclick="run()">시뮬레이션 시작 및 결과 업데이트</button>
+    <button onclick="run()">시뮬레이션 시작</button>
 
     <div class="chart-container"><canvas id="dmgChart"></canvas></div>
 
     <div class="comparison-panel">
         <div class="comp-card">
-            <div class="comp-title">개선 효율 (개선 vs 기존 라이카)</div>
+            <div style="font-size:0.85rem; color:#555;">개선 효율 (개선 vs 기존 라이카)</div>
             <div id="diff_prop_orig" class="comp-value">0%</div>
         </div>
         <div class="comp-card">
-            <div class="comp-title">상대 성능 (개선 라이카 vs 디아나[왕년])</div>
+            <div style="font-size:0.85rem; color:#555;">상대 성능 (개선 라이카 vs 디아나[왕년])</div>
             <div id="diff_prop_dn" class="comp-value">0%</div>
         </div>
     </div>
 
     <div class="logs-panel">
-        <div><h3 style="color:var(--gray)">기존 라이카 로그</h3><div id="log_orig" class="log-box"></div></div>
-        <div><h3 style="color:var(--lk-color)">개선 라이카 로그</h3><div id="log_prop" class="log-box"></div></div>
-        <div><h3 style="color:var(--dn-color)">디아나[왕년] 로그</h3><div id="log_dn" class="log-box"></div></div>
+        <div><h3>기존 라이카 로그</h3><div id="log_orig" class="log-box"></div></div>
+        <div><h3>개선 라이카 로그</h3><div id="log_prop" class="log-box"></div></div>
+        <div><h3>디아나[왕년] 로그</h3><div id="log_dn" class="log-box"></div></div>
     </div>
 </div>
 
@@ -108,8 +103,8 @@ const parseT = (id) => get(id).split(',').map(v => parseFloat(v.trim())).filter(
 function run() {
     const timeLimit = 100;
     const configs = {
-        orig: { atk: parseFloat(get('lk_orig_atk')), crit: parseFloat(get('lk_orig_crit'))/100, cd: parseFloat(get('lk_orig_cd'))/100, low: parseFloat(get('lk_orig_low_c'))/100, high: parseFloat(get('lk_orig_high_c'))/100, aside: parseInt(get('lk_orig_aside')), lt: parseT('lk_orig_low_t'), ht: parseT('lk_orig_high_t') },
-        prop: { atk: parseFloat(get('lk_prop_atk')), crit: parseFloat(get('lk_prop_crit'))/100, cd: parseFloat(get('lk_prop_cd'))/100, low: parseFloat(get('lk_prop_low_c'))/100, high: parseFloat(get('lk_prop_high_c'))/100, aside: parseInt(get('lk_prop_aside')), lt: parseT('lk_prop_low_t'), ht: parseT('lk_prop_high_t'), pNorm: parseFloat(get('p_norm'))/100, pAtk: parseFloat(get('p_atk'))/100 },
+        orig: { atk: parseFloat(get('lk_orig_atk')), crit: parseFloat(get('lk_orig_crit'))/100, cd: parseFloat(get('lk_orig_cd'))/100, low: 0, high: parseFloat(get('lk_orig_high_c'))/100, aside: parseInt(get('lk_orig_aside')), lt: parseT('lk_orig_low_t'), ht: parseT('lk_orig_high_t') },
+        prop: { atk: parseFloat(get('lk_prop_atk')), crit: parseFloat(get('lk_prop_crit'))/100, cd: parseFloat(get('lk_prop_cd'))/100, low: 0, high: parseFloat(get('lk_prop_high_c'))/100, aside: parseInt(get('lk_prop_aside')), lt: parseT('lk_prop_low_t'), ht: parseT('lk_prop_high_t'), pNorm: parseFloat(get('p_norm'))/100, pAtk: parseFloat(get('p_atk'))/100 },
         dn: { atk: parseFloat(get('dn_atk')), crit: parseFloat(get('dn_crit'))/100, cd: parseFloat(get('dn_cd'))/100, low: parseFloat(get('dn_low_c'))/100, high: parseFloat(get('dn_high_c'))/100, aside: parseInt(get('dn_aside')), lt: parseT('dn_low_t'), ht: parseT('dn_high_t') }
     };
 
@@ -121,7 +116,9 @@ function run() {
     document.getElementById('log_prop').innerText = rProp.log;
     document.getElementById('log_dn').innerText = rDn.log;
 
-    updateDiff(rOrig.data.at(-1), rProp.data.at(-1), rDn.data.at(-1));
+    const calc = (target, base) => (((target / base) - 1) * 100).toFixed(1);
+    document.getElementById('diff_prop_orig').innerText = "+" + calc(rProp.data.at(-1), rOrig.data.at(-1)) + "%";
+    document.getElementById('diff_prop_dn').innerText = calc(rProp.data.at(-1), rDn.data.at(-1)) + "%";
 
     if(chart) chart.destroy();
     chart = new Chart(document.getElementById('dmgChart').getContext('2d'), {
@@ -131,27 +128,11 @@ function run() {
             datasets: [
                 { label: '기존 라이카', data: rOrig.data, borderColor: '#888', borderWidth: 2, fill: false },
                 { label: '개선 라이카', data: rProp.data, borderColor: '#28a745', borderWidth: 4, fill: false },
-                { label: '디아나[왕년]', data: rDn.data, borderColor: '#dc3545', borderWidth: 2, fill: false }
+                { label: '디아나', data: rDn.data, borderColor: '#dc3545', borderWidth: 2, fill: false }
             ]
         },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { tooltip: { mode: 'index' } } }
+        options: { responsive: true, maintainAspectRatio: false }
     });
-}
-
-function updateDiff(orig, prop, dn) {
-    const calc = (target, base) => (((target / base) - 1) * 100).toFixed(1);
-    
-    const p_o = calc(prop, orig);
-    const p_d = calc(prop, dn);
-
-    const setUI = (id, val) => {
-        const el = document.getElementById(id);
-        el.innerText = (val > 0 ? "+" : "") + val + "%";
-        el.className = "comp-value " + (val > 0 ? "up" : "down");
-    };
-
-    setUI('diff_prop_orig', p_o);
-    setUI('diff_prop_dn', p_d);
 }
 
 function sim(type, c, limit) {
@@ -178,37 +159,40 @@ function sim(type, c, limit) {
             if (c.aside >= 2) dMult *= 1.3;
         }
 
+        // 고학년 발동
         if (c.ht.length > 0 && t >= c.ht[0] && highCD <= 0) {
             c.ht.shift();
             let m = c.high; if (type === 'dn' && c.aside >= 3) m *= 1.33;
             let d = tAtk * m * dMult * critBonus;
             total += d; highCD = (type === 'dn' ? 40 : 32);
-            if (type.includes('lk')) { isOver = true; setTimeout(()=>isOver=false, 12000); } else isBack = true;
+            if (type.includes('lk')) isOver = true; else isBack = true;
             log += `[${t.toFixed(1)}s] ★고학년 발동 (${Math.floor(d)})\n`;
         }
 
+        // 저학년 발동 (디아나 백수공권 해제 로직 포함)
         if (c.lt.length > 0 && t >= c.lt[0] && lowCD <= 0) {
             c.lt.shift();
             if (type.includes('lk')) {
                 isShock = true; isStim = true;
-                setTimeout(()=>{isShock=false; isStim=false;}, 12000);
                 if (type === 'lk_prop' && c.aside >= 2) {
                     let d = tAtk * 17.5 * dMult * critBonus; total += d;
                     highCD = Math.max(0, highCD - 5);
-                    log += `[${t.toFixed(1)}s] 저학년 + 번개펀치(${Math.floor(d)}) + 고학년쿨감\n`;
-                } else log += `[${t.toFixed(1)}s] 저학년 발동 (버프 활성)\n`;
+                    log += `[${t.toFixed(1)}s] 저학년 + 번개펀치(${Math.floor(d)})\n`;
+                } else log += `[${t.toFixed(1)}s] 저학년 발동\n`;
             } else {
                 let m = c.low; if (c.aside >= 3) m *= 1.33;
                 let d = tAtk * m * dMult * critBonus; total += d;
-                log += `[${t.toFixed(1)}s] 저학년 발동 (${Math.floor(d)})\n`;
+                isBack = false; // ★백수공권 종료 페널티 적용
+                log += `[${t.toFixed(1)}s] 저학년 발동 (백수공권 종료) (${Math.floor(d)})\n`;
             }
             lowCD = 15;
         }
 
+        // 평타 계산
         if (atkCD <= 0) {
             let m = 0;
             if (type.includes('lk')) {
-                if (enhT <= 0) { m = (isShock ? 4.5 : 1.5); enhT = 5; log += `[${t.toFixed(1)}s] 강화 공격\n`; }
+                if (enhT <= 0) { m = (isShock ? 4.5 : 1.5); enhT = 5; }
                 else { m = 1.5; if (type === 'lk_prop' && isStim) m *= (1 + c.pNorm); }
             } else {
                 m = (isBack ? 3.6 : 0.9); if (c.aside >= 2) m += 3.0;
