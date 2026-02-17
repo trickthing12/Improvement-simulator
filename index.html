@@ -65,7 +65,7 @@
         </div>
 
         <div class="card" style="border-top-color: var(--dn-color);">
-            <h2>디아나 (Diana)</h2>
+            <h2>디아나[왕년] (Diana)</h2>
             <div class="input-grid">
                 <div class="input-group"><label>공격력</label><input type="number" id="dn_atk" value="5000"></div>
                 <div class="input-group"><label>치확/치피(%)</label><div style="display:flex;"><input type="number" id="dn_crit" value="30" style="width:50%"><input type="number" id="dn_cd" value="50" style="width:50%"></div></div>
@@ -88,7 +88,7 @@
             <div id="diff_prop_orig" class="comp-value">0%</div>
         </div>
         <div class="comp-card">
-            <div class="comp-title">상대 성능 (개선 라이카 vs 디아나)</div>
+            <div class="comp-title">상대 성능 (개선 라이카 vs 디아나[왕년])</div>
             <div id="diff_prop_dn" class="comp-value">0%</div>
         </div>
     </div>
@@ -96,7 +96,7 @@
     <div class="logs-panel">
         <div><h3 style="color:var(--gray)">기존 라이카 로그</h3><div id="log_orig" class="log-box"></div></div>
         <div><h3 style="color:var(--lk-color)">개선 라이카 로그</h3><div id="log_prop" class="log-box"></div></div>
-        <div><h3 style="color:var(--dn-color)">디아나 로그</h3><div id="log_dn" class="log-box"></div></div>
+        <div><h3 style="color:var(--dn-color)">디아나[왕년] 로그</h3><div id="log_dn" class="log-box"></div></div>
     </div>
 </div>
 
@@ -131,7 +131,7 @@ function run() {
             datasets: [
                 { label: '기존 라이카', data: rOrig.data, borderColor: '#888', borderWidth: 2, fill: false },
                 { label: '개선 라이카', data: rProp.data, borderColor: '#28a745', borderWidth: 4, fill: false },
-                { label: '디아나', data: rDn.data, borderColor: '#dc3545', borderWidth: 2, fill: false }
+                { label: '디아나[왕년]', data: rDn.data, borderColor: '#dc3545', borderWidth: 2, fill: false }
             ]
         },
         options: { responsive: true, maintainAspectRatio: false, plugins: { tooltip: { mode: 'index' } } }
