@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>라이카 개선안 시뮬레이터)</title>
+    <title>라이카 개선안 시뮬레이터</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root { --lk-color: #28a745; --dn-color: #dc3545; --gray: #666; --blue: #007bff; }
@@ -33,13 +33,15 @@
 
     <div class="panels">
         <div class="card" style="border-top-color: var(--gray);">
-            <h2>기존 라이카 (Original)</h2>
+            <h2>기본 라이카 (Original)</h2>
             <div class="input-grid">
                 <div class="input-group"><label>공격력</label><input type="number" id="lk_orig_atk" value="5000"></div>
                 <div class="input-group"><label>치확/치피(%)</label><div style="display:flex;"><input type="number" id="lk_orig_crit" value="30" style="width:50%"><input type="number" id="lk_orig_cd" value="50" style="width:50%"></div></div>
-                <div class="input-group"><label>기본/강화 계수(%)</label><input type="number" id="lk_orig_base_c" value="150"></div>
+                <div class="input-group"><label>평타/강화 계수(%)</label><input type="number" id="lk_orig_base_c" value="150"></div>
+                <div class="input-group"><label>저학년 계수(%)</label><input type="number" id="lk_orig_low_c" value="0"></div>
+                <div class="input-group"><label>고학년 계수(%)</label><input type="number" id="lk_orig_high_c" value="650"></div>
                 <div class="input-group"><label>어사이드</label><select id="lk_orig_aside"><option value="0">0</option><option value="1">a1</option><option value="2" selected>a2</option><option value="3">a3</option></select></div>
-                <div class="input-group timing-input"><label>저/고 타이밍 (초)</label><input type="text" id="lk_orig_t" value="20, 40 | 30, 32"></div>
+                <div class="input-group timing-input"><label>저학년/고학년 타이밍 (초)</label><input type="text" id="lk_orig_t" value="20, 40 | 30, 32"></div>
             </div>
         </div>
 
@@ -48,10 +50,12 @@
             <div class="input-grid">
                 <div class="input-group"><label>공격력</label><input type="number" id="lk_prop_atk" value="5000"></div>
                 <div class="input-group"><label>치확/치피(%)</label><div style="display:flex;"><input type="number" id="lk_prop_crit" value="30" style="width:50%"><input type="number" id="lk_prop_cd" value="50" style="width:50%"></div></div>
-                <div class="input-group"><label>기본/강화 계수(%)</label><input type="number" id="lk_prop_base_c" value="150"></div>
+                <div class="input-group"><label>평타/강화 계수(%)</label><input type="number" id="lk_prop_base_c" value="150"></div>
+                <div class="input-group"><label>저학년 계수(%)</label><input type="number" id="lk_prop_low_c" value="0"></div>
+                <div class="input-group"><label>고학년 계수(%)</label><input type="number" id="lk_prop_high_c" value="650"></div>
                 <div class="input-group"><label>어사이드</label><select id="lk_prop_aside"><option value="0">0</option><option value="1">a1</option><option value="2" selected>a2</option><option value="3">a3</option></select></div>
                 <div class="prop-box"><label>✨ 개선: 평타증폭/공증(%)</label><div style="display:flex;gap:5px;"><input type="number" id="p_norm" value="10" style="width:50%"><input type="number" id="p_atk" value="20" style="width:50%"></div></div>
-                <div class="input-group timing-input"><label>저/고 타이밍 (초)</label><input type="text" id="lk_prop_t" value="20, 40 | 30, 32"></div>
+                <div class="input-group timing-input"><label>저학년/고학년 타이밍 (초)</label><input type="text" id="lk_prop_t" value="20, 40 | 30, 32"></div>
             </div>
         </div>
 
@@ -60,9 +64,11 @@
             <div class="input-grid">
                 <div class="input-group"><label>공격력</label><input type="number" id="dn_atk" value="5000"></div>
                 <div class="input-group"><label>치확/치피(%)</label><div style="display:flex;"><input type="number" id="dn_crit" value="30" style="width:50%"><input type="number" id="dn_cd" value="50" style="width:50%"></div></div>
-                <div class="input-group"><label>기본 90 / 백수 360 (%)</label><input type="text" value="90 / 360" disabled></div>
+                <div class="input-group"><label>평타/강화 계수(%)</label><input type="number" id="dn_base_c" value="90"></div>
+                <div class="input-group"><label>저학년 계수(%)</label><input type="number" id="dn_low_c" value="780"></div>
+                <div class="input-group"><label>고학년 계수(%)</label><input type="number" id="dn_high_c" value="2350"></div>
                 <div class="input-group"><label>어사이드</label><select id="dn_aside"><option value="0">0</option><option value="1">a1</option><option value="2" selected>a2</option><option value="3">a3</option></select></div>
-                <div class="input-group timing-input" style="margin-top:40px;"><label>저/고 타이밍 (초)</label><input type="text" id="dn_t" value="20, 40 | 30, 70"></div>
+                <div class="input-group timing-input" style="margin-top:40px;"><label>저학년/고학년 타이밍 (초)</label><input type="text" id="dn_t" value="20, 40 | 30, 70"></div>
             </div>
         </div>
     </div>
@@ -73,11 +79,11 @@
 
     <div class="comparison-panel">
         <div class="comp-card"><div>개선 효율 (개선 vs 기존)</div><div id="diff_prop_orig" class="comp-value">0%</div></div>
-        <div class="comp-card"><div>상대 성능 (개선 vs 디아나)</div><div id="diff_prop_dn" class="comp-value">0%</div></div>
+        <div class="comp-card"><div>상대 성능 (개선 vs 디아나[왕년])</div><div id="diff_prop_dn" class="comp-value">0%</div></div>
     </div>
 
     <div class="logs-panel">
-        <div><h3>기존 로그</h3><div id="log_orig" class="log-box"></div></div>
+        <div><h3>기본 로그</h3><div id="log_orig" class="log-box"></div></div>
         <div><h3>개선 로그</h3><div id="log_prop" class="log-box"></div></div>
         <div><h3>디아나[왕년] 로그</h3><div id="log_dn" class="log-box"></div></div>
     </div>
@@ -87,7 +93,9 @@
 let chart;
 const get = (id) => document.getElementById(id).value;
 const parseT = (id) => {
-    const parts = get(id).split('|');
+    const val = get(id);
+    if (!val.includes('|')) return { low: [], high: [] };
+    const parts = val.split('|');
     return { 
         low: parts[0].split(',').map(v => parseFloat(v.trim())).filter(n => !isNaN(n)).sort((a,b)=>a-b),
         high: parts[1].split(',').map(v => parseFloat(v.trim())).filter(n => !isNaN(n)).sort((a,b)=>a-b)
@@ -97,9 +105,9 @@ const parseT = (id) => {
 function run() {
     const timeLimit = 100;
     const configs = {
-        orig: { atk: parseFloat(get('lk_orig_atk')), crit: parseFloat(get('lk_orig_crit'))/100, cd: parseFloat(get('lk_orig_cd'))/100, baseC: parseFloat(get('lk_orig_base_c'))/100, aside: parseInt(get('lk_orig_aside')), t: parseT('lk_orig_t') },
-        prop: { atk: parseFloat(get('lk_prop_atk')), crit: parseFloat(get('lk_prop_crit'))/100, cd: parseFloat(get('lk_prop_cd'))/100, baseC: parseFloat(get('lk_prop_base_c'))/100, aside: parseInt(get('lk_prop_aside')), t: parseT('lk_prop_t'), pNorm: parseFloat(get('p_norm'))/100, pAtk: parseFloat(get('p_atk'))/100 },
-        dn: { atk: parseFloat(get('dn_atk')), crit: parseFloat(get('dn_crit'))/100, cd: parseFloat(get('dn_cd'))/100, aside: parseInt(get('dn_aside')), t: parseT('dn_t') }
+        orig: { atk: parseFloat(get('lk_orig_atk')), crit: parseFloat(get('lk_orig_crit'))/100, cd: parseFloat(get('lk_orig_cd'))/100, baseC: parseFloat(get('lk_orig_base_c'))/100, low: parseFloat(get('lk_orig_low_c'))/100, high: parseFloat(get('lk_orig_high_c'))/100, aside: parseInt(get('lk_orig_aside')), t: parseT('lk_orig_t') },
+        prop: { atk: parseFloat(get('lk_prop_atk')), crit: parseFloat(get('lk_prop_crit'))/100, cd: parseFloat(get('lk_prop_cd'))/100, baseC: parseFloat(get('lk_prop_base_c'))/100, low: parseFloat(get('lk_prop_low_c'))/100, high: parseFloat(get('lk_prop_high_c'))/100, aside: parseInt(get('lk_prop_aside')), t: parseT('lk_prop_t'), pNorm: parseFloat(get('p_norm'))/100, pAtk: parseFloat(get('p_atk'))/100 },
+        dn: { atk: parseFloat(get('dn_atk')), crit: parseFloat(get('dn_crit'))/100, cd: parseFloat(get('dn_cd'))/100, baseC: parseFloat(get('dn_base_c'))/100, low: parseFloat(get('dn_low_c'))/100, high: parseFloat(get('dn_high_c'))/100, aside: parseInt(get('dn_aside')), t: parseT('dn_t') }
     };
 
     const rOrig = sim('lk_orig', configs.orig, timeLimit);
@@ -143,46 +151,47 @@ function sim(type, c, limit) {
         let tAtk = curAtk, aspd = 1.0, dMult = 1.0;
 
         if (type.includes('lk')) {
-            if (isShock && c.aside < 2) aspd *= 0.7; // 감전 공속감소
-            if (isOver) aspd *= 1.42; // 고학년 공속증가
-            if (type === 'lk_prop' && isStim) tAtk *= (1 + c.pAtk); // 개선안 공증
-            if (c.aside >= 3) dMult *= 1.195; // 라이카 a3 피증
+            if (isShock && c.aside < 2) aspd *= 0.7;
+            if (isOver) aspd *= 1.42;
+            if (type === 'lk_prop' && isStim) tAtk *= (1 + c.pAtk);
+            if (c.aside >= 3) dMult *= 1.195;
         } else {
-            if (isBack && c.aside >= 2) dMult *= 1.6; // 디아나 a2 백수 피증
-            if (c.aside >= 2) dMult *= 1.3; // 디아나 a2 적 피증 30%
+            if (isBack && c.aside >= 2) dMult *= 1.6;
+            if (c.aside >= 2) dMult *= 1.3;
         }
 
-        // 고학년 발동
+        // 고학년 발동 (입력된 c.high 계수 사용)
         if (c.t.high.length > 0 && t >= c.t.high[0] && highCD <= 0) {
             c.t.high.shift();
-            let m = type.includes('lk') ? 6.5 : 23.5;
-            if (type === 'dn' && c.aside >= 3) m *= 1.33; // 디아나 a3 스킬피증
+            let m = c.high; 
+            if (type === 'dn' && c.aside >= 3) m *= 1.33; 
             let d = tAtk * m * dMult * critBonus;
             total += d; highCD = type === 'dn' ? 40 : 32;
             if (type.includes('lk')) isOver = true; else isBack = true;
             log += `[${t.toFixed(1)}s] ★고학년 (${Math.floor(d)})\n`;
         }
 
-        // 저학년 발동 (디아나 백수공권 해제 및 라이카 번개펀치)
+        // 저학년 발동 (입력된 c.low 계수 사용)
         if (c.t.low.length > 0 && t >= c.t.low[0] && lowCD <= 0) {
             c.t.low.shift();
             if (type.includes('lk')) {
                 isShock = true; isStim = true;
+                let d = tAtk * c.low * dMult * critBonus; total += d;
                 if (type === 'lk_prop' && c.aside >= 2) {
-                    let d = tAtk * 17.5 * dMult * critBonus; total += d;
+                    let d2 = tAtk * 17.5 * dMult * critBonus; total += d2;
                     highCD = Math.max(0, highCD - 5);
-                    log += `[${t.toFixed(1)}s] 저학년+번개펀치(${Math.floor(d)})\n`;
+                    log += `[${t.toFixed(1)}s] 저학년 + 번개펀치(${Math.floor(d2)})\n`;
                 } else log += `[${t.toFixed(1)}s] 저학년 발동\n`;
             } else {
-                let m = 7.8; if (c.aside >= 3) m *= 1.33;
+                let m = c.low; if (c.aside >= 3) m *= 1.33;
                 let d = tAtk * m * dMult * critBonus; total += d;
-                isBack = false; // 디아나 백수공권 해제 페널티
+                isBack = false;
                 log += `[${t.toFixed(1)}s] 저학년 (백수해제) (${Math.floor(d)})\n`;
             }
             lowCD = 15;
         }
 
-        // 디아나 피격 강화 공격 (1.5초마다 1회 피격 가정)
+        // 디아나 피격 강화 공격 (1.5초마다 피격 가정)
         if (type === 'dn' && Math.floor(t * 10) % 15 === 0) {
             hitCount++;
             if (hitCount >= 12) {
@@ -191,21 +200,19 @@ function sim(type, c, limit) {
             }
         }
 
-        // 평타/강화 공격 계산
+        // 평타/강화 공격 (입력된 c.baseC 계수 사용)
         if (atkCD <= 0) {
             let m = 0;
             if (type.includes('lk')) {
                 if (enhT <= 0) { 
-                    m = c.baseC * (isShock ? 2.0 : 1.0); // 150% 베이스, 감전 시 2배(3.0)
+                    m = c.baseC * (isShock ? 2.0 : 1.0); // 150% 베이스, 감전 시 2배
                     enhT = 5; log += `[${t.toFixed(1)}s] 강화공격\n`;
-                } else { 
-                    m = c.baseC; 
-                }
-                // 개선 라이카는 모든 일반공격(기본/강화)에 pNorm 증폭 적용
+                } else m = c.baseC; 
                 if (type === 'lk_prop' && isStim) m *= (1 + c.pNorm);
             } else {
-                m = (isBack ? (3.6 + 0.9) : 0.9); // 백수공권 360% + 추가 90% 반영
-                if (c.aside >= 2) m += 3.0; // 디아나 a2 300% 추가피해
+                // 디아나 백수공권 4배(360%) + 추가 피해 90%
+                m = (isBack ? (c.baseC * 4 + 0.9) : c.baseC); 
+                if (c.aside >= 2) m += 3.0;
             }
             total += tAtk * m * dMult * critBonus;
             atkCD = 1.0 / aspd;
