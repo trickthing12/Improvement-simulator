@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>라이카 개선안 시뮬레이터 </title>
+    <title>라이카 개선안 시뮬레이터</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root { --lk-color: #28a745; --dn-color: #dc3545; --gray: #666; --blue: #007bff; }
@@ -19,11 +19,10 @@
         .prop-box { grid-column: 1 / -1; background: #eef9f1; padding: 10px; border-radius: 8px; margin-top: 5px; border: 1px solid #c3e6cb; }
         .chart-container { background: white; padding: 15px; border-radius: 12px; height: 350px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         
-        /* 비교 대시보드 스타일 */
-        .comparison-panel { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
-        .comp-card { padding: 10px; border-radius: 8px; background: #f9f9f9; }
+        .comparison-panel { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+        .comp-card { padding: 10px; border-radius: 8px; background: #f9f9f9; border: 1px solid #eee; }
         .comp-title { font-size: 0.85rem; color: #555; font-weight: bold; margin-bottom: 5px; }
-        .comp-value { font-size: 1.5rem; font-weight: 800; }
+        .comp-value { font-size: 1.8rem; font-weight: 800; }
         .up { color: var(--dn-color); }
         .down { color: var(--blue); }
 
@@ -35,11 +34,11 @@
 <body>
 
 <div class="layout">
-    <h1>개별 스탯 & 타이밍 정밀 시뮬레이터</h1>
+    <h1>라이카 개선안 시뮬레이터</h1>
 
     <div class="panels">
         <div class="card" style="border-top-color: var(--gray);">
-            <h2>기존 라이카 (Original) [cite: 22]</h2>
+            <h2>기존 라이카 (Original)</h2>
             <div class="input-grid">
                 <div class="input-group"><label>공격력</label><input type="number" id="lk_orig_atk" value="5000"></div>
                 <div class="input-group"><label>치확/치피(%)</label><div style="display:flex;"><input type="number" id="lk_orig_crit" value="30" style="width:50%"><input type="number" id="lk_orig_cd" value="50" style="width:50%"></div></div>
@@ -52,21 +51,21 @@
         </div>
 
         <div class="card" style="border-top-color: var(--lk-color);">
-            <h2>개선 라이카 (Proposed) [cite: 374]</h2>
+            <h2>개선 라이카 (Proposed)</h2>
             <div class="input-grid">
                 <div class="input-group"><label>공격력</label><input type="number" id="lk_prop_atk" value="5000"></div>
                 <div class="input-group"><label>치확/치피(%)</label><div style="display:flex;"><input type="number" id="lk_prop_crit" value="30" style="width:50%"><input type="number" id="lk_prop_cd" value="50" style="width:50%"></div></div>
                 <div class="input-group"><label>저학년 계수(%)</label><input type="number" id="lk_prop_low_c" value="0"></div>
                 <div class="input-group"><label>고학년 계수(%)</label><input type="number" id="lk_prop_high_c" value="650"></div>
                 <div class="input-group"><label>어사이드</label><select id="lk_prop_aside"><option value="0">0</option><option value="1">a1</option><option value="2" selected>a2</option><option value="3">a3</option></select></div>
-                <div class="prop-box"><label>✨ 개선 수치: 평타증폭/공증(%) [cite: 391, 413]</label><div style="display:flex;gap:5px;"><input type="number" id="p_norm" value="50" style="width:50%"><input type="number" id="p_atk" value="20" style="width:50%"></div></div>
+                <div class="prop-box"><label>✨ 개선 수치: 평타증폭/공증(%)</label><div style="display:flex;gap:5px;"><input type="number" id="p_norm" value="50" style="width:50%"><input type="number" id="p_atk" value="20" style="width:50%"></div></div>
                 <div class="input-group timing-input"><label>저학년 타이밍 (초)</label><input type="text" id="lk_prop_low_t" value="5, 25, 45, 65, 85"></div>
                 <div class="input-group timing-input"><label>고학년 타이밍 (초)</label><input type="text" id="lk_prop_high_t" value="10, 45, 80"></div>
             </div>
         </div>
 
         <div class="card" style="border-top-color: var(--dn-color);">
-            <h2>디아나 (Diana) [cite: 371]</h2>
+            <h2>디아나 (Diana)</h2>
             <div class="input-grid">
                 <div class="input-group"><label>공격력</label><input type="number" id="dn_atk" value="5000"></div>
                 <div class="input-group"><label>치확/치피(%)</label><div style="display:flex;"><input type="number" id="dn_crit" value="30" style="width:50%"><input type="number" id="dn_cd" value="50" style="width:50%"></div></div>
@@ -83,18 +82,14 @@
 
     <div class="chart-container"><canvas id="dmgChart"></canvas></div>
 
-    <div class="comparison-panel" id="compPanel">
+    <div class="comparison-panel">
         <div class="comp-card">
             <div class="comp-title">개선 효율 (개선 vs 기존 라이카)</div>
             <div id="diff_prop_orig" class="comp-value">0%</div>
         </div>
         <div class="comp-card">
-            <div class="comp-title">메타 대비 (개선 라이카 vs 디아나)</div>
+            <div class="comp-title">상대 성능 (개선 라이카 vs 디아나)</div>
             <div id="diff_prop_dn" class="comp-value">0%</div>
-        </div>
-        <div class="comp-card">
-            <div class="comp-title">용병 성능 (디아나 vs 기존 라이카)</div>
-            <div id="diff_dn_orig" class="comp-value">0%</div>
         </div>
     </div>
 
@@ -122,12 +117,10 @@ function run() {
     const rProp = sim('lk_prop', configs.prop, timeLimit);
     const rDn = sim('dn', configs.dn, timeLimit);
 
-    // 로그 및 그래프 업데이트
     document.getElementById('log_orig').innerText = rOrig.log;
     document.getElementById('log_prop').innerText = rProp.log;
     document.getElementById('log_dn').innerText = rDn.log;
 
-    // 딜 차이 계산 및 업데이트
     updateDiff(rOrig.data.at(-1), rProp.data.at(-1), rDn.data.at(-1));
 
     if(chart) chart.destroy();
@@ -150,7 +143,6 @@ function updateDiff(orig, prop, dn) {
     
     const p_o = calc(prop, orig);
     const p_d = calc(prop, dn);
-    const d_o = calc(dn, orig);
 
     const setUI = (id, val) => {
         const el = document.getElementById(id);
@@ -160,10 +152,8 @@ function updateDiff(orig, prop, dn) {
 
     setUI('diff_prop_orig', p_o);
     setUI('diff_prop_dn', p_d);
-    setUI('diff_dn_orig', d_o);
 }
 
-// sim 함수는 이전 로직 유지 (타이밍 및 어사이드 3단계 계산 반영)
 function sim(type, c, limit) {
     let data = [0], total = 0, t = 0, log = "";
     let isShock = false, isStim = false, isOver = false, isBack = false;
